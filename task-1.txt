@@ -1,7 +1,8 @@
 Öğrenci No:250541017
 AD-SOYAD:Meryem Melek Şimşek
 
-Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:BAŞLA
+Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+BAŞLA
 
 1. GİRİŞ:
    Yaz "Kaç dersten sınava gireceksin?"
@@ -82,4 +83,5 @@ Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya e
    SON
 
 BİTİR
+
 
