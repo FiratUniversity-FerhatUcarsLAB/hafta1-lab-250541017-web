@@ -1,4 +1,85 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:250541017
+AD-SOYAD:Meryem Melek Şimşek
 
-Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:BAŞLA
+
+1. GİRİŞ:
+   Yaz "Kaç dersten sınava gireceksin?"
+   Oku ders_sayısı
+
+   Boş liste oluştur: ders_listesi
+
+   TEKRARLA i = 1'dan ders_sayısı'na kadar:
+       Yaz "Ders", i, "adı:"
+       Oku ders_adı
+       Yaz ders_adı, "dersinin önem derecesini 1-5 arasında gir (5 = çok önemli):"
+       Oku önem_derecesi
+       Yaz ders_adı, "konu sayısını gir:"
+       Oku konu_sayısı
+       Yaz ders_adı, "seviyeni 1-5 arasında gir (1 = zayıf, 5 = çok iyi):"
+       Oku seviye
+       ders_listesine (ders_adı, önem_derecesi, konu_sayısı, seviye) ekle
+   TEKRAR SONU
+
+   Yaz "Sınava kaç gün kaldı?"
+   Oku kalan_gün
+
+   Yaz "Günde ortalama kaç saat çalışabilirsin?"
+   Oku günlük_saat
+
+2. İŞLEMLER:
+
+   toplam_süre = kalan_gün * günlük_saat
+
+   toplam_ağırlık = 0
+   HER ders için:
+       ağırlık = önem_derecesi + (6 - seviye)
+       toplam_ağırlık = toplam_ağırlık + ağırlık
+   SON
+
+3. PLAN OLUŞTURMA:
+
+   HER ders için:
+       ağırlık = önem_derecesi + (6 - seviye)
+       ders_süresi = (ağırlık / toplam_ağırlık) * toplam_süre
+       günlük_süre = ders_süresi / kalan_gün
+       HER gün için:
+           plan[gün].dersler += (ders_adı, günlük_süre)
+       SON
+   SON
+
+4. KOŞULLU DURUMLAR:
+
+   Eğer toplam_süre < (ders_sayısı * 1 saat * kalan_gün) ise:
+       Yaz "Zaman çok kısıtlı! Daha önemli derslere öncelik veriliyor..."
+       planı yeniden düzenle:
+           Sadece önem_derecesi >= 3 olan derslere zaman ayır
+           Az önemli dersleri kaldır veya kısalt
+   DEĞİLSE:
+       Yaz "Zaman yeterli, tüm derslere dengeli dağıtım yapılacak."
+   SON
+
+5. TEKRAR EDEN PLAN KONTROLÜ:
+
+   gün = 1
+   TEKRARLA gün <= kalan_gün:
+       Yaz "Gün", gün, "planı:"
+       HER ders içinde plan[gün]:
+           Yaz " - ", ders_adı, ":", süre, "saat"
+       SON
+       Eğer kullanıcı "planı değiştirmek istiyor musun?" sorusuna "Evet" derse:
+           İlgili günün planını manuel düzenle
+       gün = gün + 1
+   TEKRAR SONU
+
+6. ÇIKIŞ:
+   Yaz "Çalışma planı başarıyla oluşturuldu!"
+   Yaz "Planı bir dosyaya kaydetmek ister misin?"
+   Eğer cevap == "Evet" ise:
+       planı dosyaya yaz
+   DEĞİLSE:
+       Yaz "Plan sadece ekranda görüntülenecek."
+   SON
+
+BİTİR
+
