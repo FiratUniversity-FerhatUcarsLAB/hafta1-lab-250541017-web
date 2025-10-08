@@ -1,4 +1,61 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:250541017
+AD-SOYAD:Meryem Melek Şimşek
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+BAŞLA
+
+TAHTA[3][3] = boş kareler
+
+FONKSİYON checkWinner(tahta)
+    TÜM SATIRLARI, SÜTUNLARI, ÇAPRAZLARI kontrol et
+    EĞER aynı sembolden 3 tane varsa
+        DÖN o sembol
+    DEĞİLSE
+        DÖN "yok"
+SON
+
+FONKSİYON findBestMove(tahta, sembol)
+    // 1. Kazanabileceğin hamle var mı?
+    HER boş kare için:
+        Kareye sembolü koy
+        EĞER checkWinner(tahta) == sembol İSE
+            DÖN o kare (kazandırır)
+        Kareyi geri boş yap
+    SON
+
+    // 2. Rakibi engelle
+    rakip = (sembol == 'X') ? 'O' : 'X'
+    HER boş kare için:
+        Kareye rakip sembolünü koy
+        EĞER checkWinner(tahta) == rakip İSE
+            DÖN o kare (engel)
+        Kareyi geri boş yap
+    SON
+
+    // 3. Orta kareyi tercih et
+    EĞER tahta[1][1] boş İSE
+        DÖN (1,1)
+
+    // 4. Rastgele boş kare seç
+    DÖN ilk bulunan boş kare
+SON
+
+DÖNGÜ oyun bitene kadar:
+    EĞER oyuncu sırasıysa
+        Oyuncudan hamle al
+    DEĞİLSE
+        move = findBestMove(tahta, 'O')
+        tahta[move] = 'O'
+    SON
+    EĞER checkWinner(tahta) != "yok"
+        YAZ kazanan
+        DUR
+SON
+
+BİTİR
+
+🔄 Farklı Çözüm Yolları
+Yaklaşım	                          Açıklama	                                      Avantaj	                    Dezavantaj
+Kural Bazlı             (Yukarıdaki)	Basit if-else mantığıyla strateji belirler	  Kolay anlaşılır	            Her durumu kapsamaz
+MiniMax Algoritması	     Olası tüm hamleleri simüle eder, en iyisini seçer	        Optimal strateji üretir    	Hesaplama maliyeti yüksek
+Rastgele Hamle	           Bilgisayar rastgele oynar	                              Basit	Stratejisiz,          kolay yenilir
