@@ -1,4 +1,142 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:250541017
+AD-SOYAD:Meryem Melek Şimşek
 
-Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz
+
+FONKSİYON Karatsuba(x, y):
+    EĞER x < 10 VE y < 10 İSE
+        DÖN x * y
+    SON
+
+    n = maksimum basamak sayısı(x, y)
+    m = n / 2
+
+    // Sayıları ortadan böl
+    x_high = x / 10^m
+    x_low = x % 10^m
+    y_high = y / 10^m
+    y_low = y % 10^m
+
+    // Böl ve Fethet kısmı
+    z0 = Karatsuba(x_low, y_low)
+    z1 = Karatsuba(x_low + x_high, y_low + y_high)
+    z2 = Karatsuba(x_high, y_high)
+
+    // Sonucu birleştir
+    SONUC = (z2 * 10^(2*m)) + ((z1 - z2 - z0) * 10^m) + z0
+
+    DÖN SONUC
+SON FONKSİYON
+🧩 Açıklama Adım Adım
+Örneğin:
+x = 1234, y = 5678
+
+1️⃣ Sayıları ikiye böl:
+x_high = 12, x_low = 34
+y_high = 56, y_low = 78
+
+2️⃣ Alt problemlere ayır:
+z0 = 34 × 78
+z1 = (12+34) × (56+78)
+z2 = 12 × 56
+
+3️⃣ Sonuçları birleştir:
+Sonuç = (z2 × 10⁴) + ((z1 - z2 - z0) × 10²) + z0
+
+Bu yöntem klasik uzun çarpmadan çok daha hızlıdır.
+
+💬 LLM (Yapay Zeka) Yardımı
+Kullanıcı: “Böl ve Fethet yaklaşımını nasıl uygularım?”
+LLM (ChatGPT):
+“Her problemi daha küçük alt problemlere böl.
+Alt problemleri çöz ve elde ettiğin sonuçları birleştir.
+Bu, çarpma, sıralama ve arama gibi problemlerde çok etkilidir.”
+
+Kullanıcı: “Java’da Karatsuba algoritmasını gösterebilir misin?”
+LLM (ChatGPT):
+
+java
+Kodu kopyala
+public class KaratsubaCarpma {
+
+    public static long karatsuba(long x, long y) {
+        if (x < 10 || y < 10) return x * y;
+
+        int n = Math.max(String.valueOf(x).length(), String.valueOf(y).length());
+        int m = n / 2;
+
+        long high1 = x / (long)Math.pow(10, m);
+        long low1 = x % (long)Math.pow(10, m);
+        long high2 = y / (long)Math.pow(10, m);
+        long low2 = y % (long)Math.pow(10, m);
+
+        long z0 = karatsuba(low1, low2);
+        long z1 = karatsuba((low1 + high1), (low2 + high2));
+        long z2 = karatsuba(high1, high2);
+
+        return (long)(z2 * Math.pow(10, 2 * m) + (z1 - z2 - z0) * Math.pow(10, m) + z0);
+    }
+
+    public static void main(String[] args) {
+        long x = 1234, y = 5678;
+        System.out.println("Sonuç: " + karatsuba(x, y));
+    }
+}
+🔄 Farklı Çözüm Yolları
+Yöntem	                         Açıklama	                                Avantaj         	                     Dezavantaj
+Klasik Çarpma                    Basamak basamak çarpma	                  Basit	                                 Yavaş, O(n²)
+Karatsuba Algoritması	           Sayıları ikiye bölüp çarpar	            Hızlı, O(n^1.58)	                     Daha karmaşık
+FFT (Fast Fourier Transform)	   Sayıları frekans alanında çarpar	        Çok büyük sayılarda çok hızlı	         Üniversite düzeyinde karmaşık matematik gerekir
+
+
+public class KaratsubaSimulasyon {
+
+    // Karatsuba çarpma algoritması (böl ve fethet)
+    public static long karatsuba(long x, long y, int seviye) {
+        String indent = " ".repeat(seviye * 4); // görsel girinti (seviye sayısına göre)
+        System.out.println(indent + "Çözülüyor: " + x + " × " + y);
+
+        // Temel durum: tek basamaklı sayılar
+        if (x < 10 || y < 10) {
+            long sonuc = x * y;
+            System.out.println(indent + "→ Basit çarpım sonucu: " + sonuc);
+            return sonuc;
+        }
+
+        // Basamak sayısı bulma
+        int n = Math.max(String.valueOf(x).length(), String.valueOf(y).length());
+        int m = n / 2;
+
+        long high1 = x / (long) Math.pow(10, m);
+        long low1 = x % (long) Math.pow(10, m);
+        long high2 = y / (long) Math.pow(10, m);
+        long low2 = y % (long) Math.pow(10, m);
+
+        System.out.println(indent + "Sayılar bölünüyor:");
+        System.out.println(indent + "x_high = " + high1 + ", x_low = " + low1);
+        System.out.println(indent + "y_high = " + high2 + ", y_low = " + low2);
+
+        // Alt problemler (recursive)
+        long z0 = karatsuba(low1, low2, seviye + 1);
+        long z1 = karatsuba((low1 + high1), (low2 + high2), seviye + 1);
+        long z2 = karatsuba(high1, high2, seviye + 1);
+
+        // Birleştirme
+        long sonuc = (long) (z2 * Math.pow(10, 2 * m) + (z1 - z2 - z0) * Math.pow(10, m) + z0);
+
+        System.out.println(indent + "Birleştiriliyor: ");
+        System.out.println(indent + "z0 = " + z0 + ", z1 = " + z1 + ", z2 = " + z2);
+        System.out.println(indent + "→ Alt sonuç: " + sonuc);
+
+        return sonuc;
+    }
+
+    public static void main(String[] args) {
+        long x = 1234;
+        long y = 5678;
+
+        System.out.println("=== Karatsuba Çarpma Simülasyonu ===");
+        long sonuc = karatsuba(x, y, 0);
+        System.out.println("\nSonuç: " + x + " × " + y + " = " + sonuc);
+    }
+}
