@@ -1,4 +1,84 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:250541017
+AD-SOYAD:Meryem Melek Şimşek
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+BAŞLA
+
+YAZ "Kaç öğrenci var?"
+AL ogrenciSayisi
+
+NOTLAR dizisi oluştur, boyutu ogrenciSayisi kadar
+
+FOR i = 1 TO ogrenciSayisi
+    YAZ i, ". öğrencinin notunu girin:"
+    AL NOTLAR[i]
+SON
+
+// Sıralama (Bubble Sort yöntemi)
+FOR i = 0 TO ogrenciSayisi-1
+    FOR j = 0 TO ogrenciSayisi-i-2
+        EĞER NOTLAR[j] < NOTLAR[j+1] İSE
+            GEÇİCİ = NOTLAR[j]
+            NOTLAR[j] = NOTLAR[j+1]
+            NOTLAR[j+1] = GEÇİCİ
+        SON
+    SON
+SON
+
+YAZ "Notlar yüksekten düşüğe sıralandı:"
+
+FOR i = 0 TO ogrenciSayisi-1
+    YAZ NOTLAR[i]
+SON
+
+BİTİR
+💬 LLM (Yapay Zeka) Yardımı
+Kullanıcı: “Sınıf notlarını sıralamak için hangi algoritmayı kullanabilirim?”
+LLM (ChatGPT):
+“En basit yöntem olarak Bubble Sort veya Selection Sort kullanılabilir.
+Küçük veri kümeleri için Bubble Sort yeterlidir. Daha büyük veri kümelerinde Quick Sort veya Merge Sort daha verimli olur.”
+
+Kullanıcı: “Java’da basit haliyle nasıl yazarım?”
+LLM (ChatGPT):
+
+java
+Kodu kopyala
+import java.util.Scanner;
+
+public class NotSirala {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Kaç öğrenci var? ");
+        int n = sc.nextInt();
+
+        int[] notlar = new int[n];
+        for (int i = 0; i < n; i++) {
+            System.out.print((i + 1) + ". öğrencinin notu: ");
+            notlar[i] = sc.nextInt();
+        }
+
+        // Bubble Sort - yüksekten düşüğe
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (notlar[j] < notlar[j + 1]) {
+                    int temp = notlar[j];
+                    notlar[j] = notlar[j + 1];
+                    notlar[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.println("Notlar yüksekten düşüğe sıralandı:");
+        for (int not : notlar) {
+            System.out.println(not);
+        }
+    }
+}
+
+🔄 Farklı Çözüm Yolları
+Yöntem	               Açıklama	                                                  Avantaj	                           Dezavantaj
+Bubble Sort         	Elemanları sırayla karşılaştırarak değiştirir   	          Basit, öğretici	                   Yavaş (O(n²))
+Selection Sort	      Her turda en büyük elemanı bulur                      	    Daha az değişim yapar           	 Hâlâ O(n²)
+Arrays.sort() (Java)	Java’nın yerleşik sıralama algoritması (Timsort)          	Çok hızlı	                         İç yapısı karmaşık
+Quick Sort	          Böl ve fethet yöntemiyle çalışır	                          Büyük verilerde çok hızlı          Karmaşık mantık gerektirir
