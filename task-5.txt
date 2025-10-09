@@ -1,4 +1,123 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:250514017
+AD-SOYAD:Meryem Melek Şimşek
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+BAŞLA
+
+YAZ "Platform seçin (Instagram/TikTok/YouTube):"
+AL platform
+YAZ "İçerik türünüzü seçin (eğlence/eğitim/lifestyle):"
+AL tur
+YAZ "Günlük paylaşım sayısı girin:"
+AL paylasim
+YAZ "Ortalama beğeni oranını girin (%):"
+AL begeni
+YAZ "Ortalama yorum sayısını girin:"
+AL yorum
+YAZ "Trend etiketi kullanıyor musunuz? (evet/hayır):"
+AL trend
+
+// Başlangıç puanı
+puan = 50
+
+// Platform etkisi
+EĞER platform == "TikTok" İSE puan = puan + 20
+EĞER platform == "Instagram" İSE puan = puan + 15
+EĞER platform == "YouTube" İSE puan = puan + 10
+
+// İçerik türü etkisi
+EĞER tur == "eğlence" İSE puan = puan + 10
+EĞER tur == "eğitim" İSE puan = puan + 8
+EĞER tur == "lifestyle" İSE puan = puan + 6
+
+// Etkileşim hesapla
+puan = puan + (begeni / 2) + (yorum * 0.5)
+
+EĞER trend == "evet" İSE puan = puan + 10
+
+EĞER paylasim > 3 İSE
+    puan = puan - 5 // spam riski
+DEĞİLSE EĞER paylasim == 1 VE begeni > 50 İSE
+    puan = puan + 5 // kaliteli paylaşım
+
+// Sonuç yorumla
+EĞER puan > 100 İSE
+    YAZ "🌟 Fenomensin! Stratejini sürdür. Skor:", puan
+DEĞİLSE EĞER puan > 70 İSE
+    YAZ "🔥 Yükseliştesin! Biraz daha etkileşim artır. Skor:", puan
+DEĞİLSE
+    YAZ "😅 Daha istikrarlı içerik üretmen gerek. Skor:", puan
+SON
+
+BİTİR
+💬 LLM (ChatGPT) Yardımı
+Kullanıcı: “Sosyal medyada fenomen olmayı algoritmik olarak nasıl modelleyebilirim?”
+LLM (ChatGPT):
+“Etkileşim, tutarlılık ve trend analizini puanlama sistemiyle birleştirerek ‘başarı skoru’ hesaplayabilirsiniz.
+Kullanıcıdan alınan girdiler üzerinden öneri sistemi de eklenebilir.”
+
+Kullanıcı: “Bunu Java’da çalışır hale getir.”
+LLM (ChatGPT):
+
+java
+Kodu kopyala
+import java.util.Scanner;
+
+public class FenomenAlgoritmasi {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Platform (Instagram/TikTok/YouTube): ");
+        String platform = sc.nextLine();
+
+        System.out.print("İçerik türü (eğlence/eğitim/lifestyle): ");
+        String tur = sc.nextLine();
+
+        System.out.print("Günlük paylaşım sayısı: ");
+        int paylasim = sc.nextInt();
+
+        System.out.print("Ortalama beğeni oranı (%): ");
+        double begeni = sc.nextDouble();
+
+        System.out.print("Ortalama yorum sayısı: ");
+        double yorum = sc.nextDouble();
+
+        sc.nextLine(); // buffer temizle
+        System.out.print("Trend etiketi kullanıyor musun? (evet/hayır): ");
+        String trend = sc.nextLine();
+
+        double puan = 50;
+
+        switch (platform) {
+            case "TikTok" -> puan += 20;
+            case "Instagram" -> puan += 15;
+            case "YouTube" -> puan += 10;
+        }
+
+        switch (tur) {
+            case "eğlence" -> puan += 10;
+            case "eğitim" -> puan += 8;
+            case "lifestyle" -> puan += 6;
+        }
+
+        puan += (begeni / 2) + (yorum * 0.5);
+
+        if (trend.equals("evet")) puan += 10;
+
+        if (paylasim > 3) puan -= 5;
+        else if (paylasim == 1 && begeni > 50) puan += 5;
+
+        if (puan > 100)
+            System.out.println("🌟 Fenomensin! Stratejini sürdür. Skor: " + puan);
+        else if (puan > 70)
+            System.out.println("🔥 Yükseliştesin! Etkileşimi artır. Skor: " + puan);
+        else
+            System.out.println("😅 Daha istikrarlı paylaşım yap. Skor: " + puan);
+    }
+}
+🔄 Farklı Çözüm Yolları
+Yaklaşım	                        Açıklama	                                        Avantaj	                       Dezavantaj
+Kural Bazlı Puanlama	            Belirli kurallara göre etkileşim puanı hesaplar	  Kolay ve hızlı	               Trend değişimlerine adapte değil
+Yapay Zekâ Tahmini	              Önceki paylaşımlardan etkileşimi tahmin eder	    Öğrenen sistem	               Veri gerektirir
+Zaman Optimizasyon Yaklaşımı	    En uygun paylaşım saatini hesaplar	              Daha fazla etkileşim sağlar    Saat verisine bağlıdır
+
